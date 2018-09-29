@@ -15,7 +15,12 @@ export default {
 
     methods:{
         noteWrite(){
-            this.$router.push('/write')
+            if(this.$store.state.userInfo.username){
+                this.$router.push('/write')
+            }else{
+                this.$message('登录后才可以写文章哦')
+            }
+           
         }
     }
 }

@@ -5,17 +5,22 @@ import App from './App'
 import router from './router'
 import 'normalize.css/normalize.css'
 import ElementUi from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
 import VueQuillEditor from 'vue-quill-editor'
+import $axios from './utils/index'
+import store from './store/index'
+
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 Vue.use(ElementUi)
 Vue.config.productionTip = false
+Vue.prototype.$axios = $axios
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

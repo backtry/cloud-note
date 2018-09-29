@@ -9,10 +9,10 @@
                 <el-input placeholder="邮箱" v-model="userData.email" ></el-input>
             </div>
             <div class="item">
-                <el-input placeholder="密码" v-model="userData.password" type="password" ></el-input>
+                <el-input placeholder="密码" v-model="userData.password" type="password" @keyup.enter.native="handleRegister"></el-input>
             </div>
             <div class="item">
-                <el-button type="primary" class="register-btn">注册</el-button>
+                <el-button type="primary" class="register-btn" @click="handleRegister">注册</el-button>
             </div>
         </div>
     </div>   
@@ -26,6 +26,21 @@ export default {
                 email:'',
                 password:''
             }
+        }
+    },
+    methods:{
+        handleRegister(){
+            this.$axios.post('/user',this.userData).then(res=>{
+                console.log(res)
+                if(res.code==200){
+                    this.$message.success(res.msg+"返回登录页")
+                     setTimeout(()=>{
+                    this.$router.push('/')
+                },1000)
+                }else{
+                    this.$message.warning(res.msg)
+                }
+            })
         }
     }
 }
